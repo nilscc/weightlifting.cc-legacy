@@ -1,5 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS Auth;
 
+-- Uncomment to reset Auth database
 DROP TABLE Auth.Sessions;
 DROP TABLE Auth.Users;
 
