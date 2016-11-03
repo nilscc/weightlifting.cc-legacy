@@ -20,8 +20,12 @@ executable lift-me
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.8 && <4.9,
+                       mtl,
+                       text,
                        happstack-server,
-                       acid-state,
-                       happstack-auth >=0.2.1.3 && <0.3
-  hs-source-dirs:      src
+                       HDBC,
+                       HDBC-postgresql,
+                       aeson,
+                       convertible
+  hs-source-dirs:      hs
   default-language:    Haskell2010
