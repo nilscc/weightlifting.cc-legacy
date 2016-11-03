@@ -1,26 +1,22 @@
 -- general extensions
 {-# LANGUAGE OverloadedStrings #-}
 
--- derive generic types for Aeson
-{-# LANGUAGE DeriveGeneric #-}
-
 -- convertible/hdbc sql instances
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module LiftMe.Training.DatabaseTypes where
 
-import GHC.Generics
-
 import Data.Convertible
-import Data.Aeson
 import qualified Data.Text as Text
+import Data.Time
+import Data.Typeable
+
 import Database.HDBC
 import Happstack.Server.Response (ToMessage(..))
 
-instance ToMessage Value where
-  toContentType _ = "text/json"
-  toMessage = encode
+unexpected :: (Show a, Typeable a, Typeable b) => a -> ConvertResult b
+unexpected = convError "Unexpected SQL value"
 
 --------------------------------------------------------------------------------
 -- General types
@@ -42,32 +38,46 @@ data User = User
 -- Workouts
 --
 
+-- | The main workout type
 data Workout = Workout
   { workoutId :: Id
-  , workoutUser :: User
-  , workoutExercises :: [ WorkoutExercise ]
+  , workoutUserId :: Id
+  , workoutDate :: LocalTime
   }
 
+instance Convertible [SqlValue] Workout where
+  safeConvert
+    [ SqlInteger id'
+    , SqlInteger user_id
+    , SqlLocalTime date ]
+    = Right $ Workout id' user_id date
+  safeConvert sql = unexpected sql
+
+-- | Exercises of one workout
 data WorkoutExercise = WorkoutExercise
   { workoutExerciseId :: Id
-  , workoutExerciseName :: Text.Text
-  , workoutExerciseSets :: [ WorkoutSet ]
+  , workoutExerciseExerciseId :: Id
+  , workoutExerciseWorkoutId :: Id
   }
+
+instance Convertible [SqlValue] WorkoutExercise where
+  safeConvert
+    [ SqlInteger id'
+    , SqlInteger exerciseId
+    , SqlInteger workoutId
+    ] = Right $ WorkoutExercise id' exerciseId workoutId
+  safeConvert sql = unexpected sql
 
 data WorkoutSet = WorkoutSet
   { workoutSetId :: Id
   , workoutSetReps :: Integer
   , workoutSetWeight :: Rational
   }
-  deriving Generic
 
 instance Convertible [SqlValue] WorkoutSet where
-  safeConvert sql = case sql of
-    [ SqlInteger id',
-      SqlInteger reps,
-      SqlRational weight ] ->
-      Right $ WorkoutSet id' reps weight
-    _ -> convError "Unexpected SQL values." sql
-
-instance ToJSON WorkoutSet where
-  toEncoding = genericToEncoding defaultOptions
+  safeConvert
+    [ SqlInteger id'
+    , SqlInteger reps
+    , SqlRational weight ]
+    = Right $ WorkoutSet id' reps weight
+  safeConvert sql = unexpected sql
