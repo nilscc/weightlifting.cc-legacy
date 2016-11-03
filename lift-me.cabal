@@ -22,6 +22,7 @@ executable lift-me
   build-depends:       base >=4.8 && <4.9,
                        mtl,
                        text,
+                       filepath,
                        happstack-server,
                        HDBC,
                        HDBC-postgresql,

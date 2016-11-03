@@ -3,8 +3,13 @@ module LiftMe.Routing where
 --import Control.Applicative
 import Control.Monad
 import Control.Monad.Trans
+
 import Data.Aeson
 import Data.Convertible
+
+import System.FilePath
+
+-- frameworks
 import Database.HDBC
 import Happstack.Server
 
@@ -31,8 +36,10 @@ staticFileServeRoute
   :: FilePath     -- ^ Path to static files
   -> ServerPartT IO Response
 staticFileServeRoute staticFilePath = msum
+  -- lookup any files under the explicit 'static' directory
   [ dir "static" $ serveDirectory DisableBrowsing ["index.html"] staticFilePath
-  , serveFile (asContentType "text/html") "static/index.html"
+  -- serve index page as default
+  , serveFile (asContentType "text/html") (staticFilePath </> "index.html")
   ]
 
 apiRoute
