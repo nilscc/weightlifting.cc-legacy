@@ -52,7 +52,7 @@ lookupWorkouts con = do
       [[SqlByteString name]] -> return $ Text.decodeUtf8 name
       s -> error "Unknown exercise ID"
 
-  lookupWorkoutSets w = do
+  lookupWorkoutSets e = do
     fetchAllConv con
       "select id, reps, weight from training.workoutsets where workoutexercise_id = ?"
-      [toSql $ DB.workoutExerciseWorkoutId w]
+      [toSql $ DB.workoutExerciseExerciseId e]
