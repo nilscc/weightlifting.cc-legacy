@@ -1,12 +1,11 @@
 CREATE SCHEMA IF NOT EXISTS Training;
 
 -- Uncomment to reset training database
-/*
-DROP TABLE Training.WorkoutSet;
-DROP TABLE Training.WorkoutExercises;
-DROP TABLE Training.Workouts;
-DROP TABLE Training.Exercises;
-*/
+DROP TABLE IF EXISTS Training.WorkoutSet;
+DROP TABLE IF EXISTS Training.WorkoutSets;
+DROP TABLE IF EXISTS Training.WorkoutExercises;
+DROP TABLE IF EXISTS Training.Workouts;
+DROP TABLE IF EXISTS Training.Exercises;
 
 -- Table for names of exercises
 CREATE TABLE IF NOT EXISTS Training.Exercises
@@ -23,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Training.Workouts
 (
   id                  SERIAL          PRIMARY KEY,
   user_id             INTEGER         NOT NULL REFERENCES Auth.Users (id),
-  date                DATE            NOT NULL
+  date                TIMESTAMP       NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Training.WorkoutExercises
@@ -38,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Training.WorkoutExercises
                                       ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Training.WorkoutSet
+CREATE TABLE IF NOT EXISTS Training.WorkoutSets
 (
   id                  SERIAL          PRIMARY KEY,
   workoutexercise_id  INTEGER         NOT NULL
@@ -47,3 +46,5 @@ CREATE TABLE IF NOT EXISTS Training.WorkoutSet
   reps                INTEGER         NOT NULL,
   weight              NUMERIC(6,2)
 );
+
+CREATE INDEX ON Training.WorkoutSets (workoutexercise_id);
