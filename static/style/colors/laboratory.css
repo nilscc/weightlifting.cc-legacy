@@ -1,0 +1,28 @@
+.bg-darker
+{
+  background-color: #2E3233;
+}
+
+.bg-dark
+{
+  background-color: #515B5E;
+}
+
+.bg-brighter
+{
+  background-color: #FFFEFC;
+}
+
+.bg-bright
+{
+  background-color: #E2E3DF;
+}
+
+.bg-highlight
+{
+  background-color: #CAF200;
+}
+.text-highlight
+{
+  color: #CAF200;
+}

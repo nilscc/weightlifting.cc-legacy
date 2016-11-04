@@ -1,0 +1,16 @@
+{
+  "name": "lift.me",
+  "version": "1.0.0",
+  "description": "Lifting website developed in Typescript",
+  "main": "static/ts/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nils <mail@nils.cc>",
+  "license": "All rights reserved.",
+  "dependencies": {
+    "@types/jquery": "^2.0.33",
+    "@types/requirejs": "^2.1.28"
+  },
+  "devDependencies": {}
+}

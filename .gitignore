@@ -7,3 +7,6 @@ dist/
 cabal.sandbox.config
 
 .hs_tags
+
+node_modules/
+static/ts/
