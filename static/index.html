@@ -13,6 +13,20 @@
       >
     </script>
 
+    <script id="workout-template" type="text/x-handlebars-template">
+      <div class="workout" id="workout_{{workoutId}}">
+        <h1>Workout #{{workoutId}}</h1>
+        {{#each workoutExercises}}
+          <h2>{{workoutExerciseName}}</h2>
+          <ul>
+            {{#each workoutExerciseSets}}
+              <li>{{workoutSetReps}} x {{weight workoutSetWeight}}</li>
+            {{/each}}
+          </ul>
+        {{/each}}
+      </div>
+    </script>
+
     <title>Lift.me</title>
   </head>
   <body class="bg-darker">
@@ -27,8 +41,9 @@
 
     <!-- MAIN SECTION -->
     <main class="bg-dark">
-      <h1>Lift.me Project Website</h1>
+      <h1>lift.me</h1>
       <p class="text-highlight">Site under construction.</p>
+      <div class="workouts"></div>
     </main>
 
     <!-- FOOTER -->

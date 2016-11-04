@@ -38,8 +38,8 @@ instance ToJSON WorkoutExercise where
 
 data WorkoutSet = WorkoutSet
   { workoutSetId :: DB.Id
-  , workoutReps :: Integer
-  , workoutWeight :: Rational
+  , workoutSetReps :: Integer
+  , workoutSetWeight :: Rational
   }
   deriving Generic
 
