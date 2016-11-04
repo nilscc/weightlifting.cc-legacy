@@ -29,5 +29,5 @@ executable lift-me
                        HDBC-postgresql,
                        aeson,
                        convertible
-  hs-source-dirs:      hs
+  hs-source-dirs:      src-hs
   default-language:    Haskell2010

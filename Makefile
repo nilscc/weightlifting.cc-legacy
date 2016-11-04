@@ -1,6 +1,6 @@
 .PHONY: all backend frontend watch dependencies
 
-TYPESCRIPT_ROOT=ts
+TYPESCRIPT_ROOT=src-ts
 TYPESCRIPT_OUT=static/ts
 
 TYPESCRIPT_TSC=tsc
