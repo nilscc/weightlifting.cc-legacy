@@ -3,7 +3,7 @@
 TYPESCRIPT_ROOT=src-ts
 TYPESCRIPT_OUT=static/ts
 
-TYPESCRIPT_TSC=tsc
+TYPESCRIPT_TSC=node_modules/typescript/bin/tsc
 TYPESCRIPT_ARGS=-m amd --rootDir ${TYPESCRIPT_ROOT} --outDir ${TYPESCRIPT_OUT}
 TYPESCRIPT_MAIN=${TYPESCRIPT_ROOT}/main.ts
 
