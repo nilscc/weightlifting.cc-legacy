@@ -5,7 +5,7 @@ name:                lift-me
 version:             0.1.0.0
 synopsis:            Lifting Tracker based on Happstack + Acid-State
 -- description:         
-license:             BSD-3-Clause
+license:             BSD3
 license-file:        LICENSE
 author:              Nils Schweinsberg
 maintainer:          mail@nils.cc
@@ -19,9 +19,10 @@ executable lift-me
   main-is:             LiftMe.hs
   -- other-modules:       
   -- other-extensions:    
-  build-depends:       base >=4.8 && <4.9,
+  build-depends:       base >=4.7 && <4.9,
                        mtl,
                        time,
+                       bytestring,
                        text,
                        filepath,
                        happstack-server,
