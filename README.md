@@ -7,8 +7,8 @@ Setup the Database
 Install PostgreSQL as database backend. Any version 9 should work. Then create
 a role and a database for the project:
 
-    $ createuser weightlifting-cc
-    $ createdb   weightlifting-cc-dev
+    $ createuser -U postgres weightlifting-cc
+    $ createdb   -U postgres weightlifting-cc-dev
 
 Use `--help` for more options. Then load the schema:
 
