@@ -19,7 +19,7 @@ serverConf = nullConf
   }
 
 -- PostgreSQL configuration string
-postgresConf = "host = 'localhost' dbname = 'liftme-test'"
+postgresConf = "host = 'localhost' user = 'weightlifting-cc' dbname = 'weightlifting-cc-dev'"
 
 -- Run the webserver
 main :: IO ()
