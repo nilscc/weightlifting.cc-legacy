@@ -35,12 +35,9 @@ mainRoute pc con = msum
 staticFileServeRoute
   :: FilePath     -- ^ Path to static files
   -> ServerPartT IO Response
-staticFileServeRoute staticFilePath = msum
+staticFileServeRoute staticFilePath = do
   -- lookup any files under the explicit 'static' directory
-  [ dir "static" $ serveDirectory DisableBrowsing ["index.html"] staticFilePath
-  -- serve index page as default
-  , serveFile (asContentType "text/html") (staticFilePath </> "index.html")
-  ]
+  serveDirectory DisableBrowsing ["index.html"] staticFilePath
 
 apiRoute
   :: IConnection con
