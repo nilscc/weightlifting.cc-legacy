@@ -10,6 +10,7 @@
   "license": "BSD-3-Clause",
   "repository": "https://github.com/mcmaniac/lift.me",
   "dependencies": {
+    "typescript": "^2.0.7",
     "@types/handlebars": "^4.0.31",
     "@types/jquery": "^2.0.33",
     "@types/requirejs": "^2.1.28"
