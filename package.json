@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nils <mail@nils.cc>",
-  "license": "All rights reserved",
+  "license": "BSD-3-Clause",
+  "repository": "https://github.com/mcmaniac/lift.me",
   "dependencies": {
     "@types/handlebars": "^4.0.31",
     "@types/jquery": "^2.0.33",
