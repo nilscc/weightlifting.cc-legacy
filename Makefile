@@ -7,7 +7,7 @@ TYPESCRIPT_TSC=tsc
 TYPESCRIPT_ARGS=-m amd --rootDir ${TYPESCRIPT_ROOT} --outDir ${TYPESCRIPT_OUT}
 TYPESCRIPT_MAIN=${TYPESCRIPT_ROOT}/main.ts
 
-all: init backend frontend
+all: init dependencies backend frontend
 
 init:
 	cabal sandbox init
