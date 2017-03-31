@@ -1,13 +1,23 @@
 CREATE SCHEMA IF NOT EXISTS data;
 
-DROP TABLE IF EXISTS data.TrainingsmittelkatalogGewichthebenBVDG CASCADE;
+--
+-- CLEAN UP
+--
 
+DROP TABLE IF EXISTS data.TrainingsmittelkatalogGewichthebenBVDG_Categories CASCADE;
+
+--
+-- LAYOUT DEFINITION
+--
+
+-- Main categories
 CREATE TABLE data.TrainingsmittelkatalogGewichthebenBVDG_Categories AS
 ( id                SERIAL
 , nr                TEXT        NOT NULL
 , name              TEXT        NOT NULL
 );
 
+-- All exercises
 CREATE TABLE data.TrainingsmittelkatalogGewichthebenBVDG AS
 ( id                SERIAL
 , nr                INTEGER     NOT NULL
@@ -24,6 +34,10 @@ CREATE TABLE data.TrainingsmittelkatalogGewichthebenBVDG AS
 , PRIMARY KEY (id)
 , FOREIGN KEY (grp) REFERENCES Exercises.TrainingsmittelkatalogGewichthebenBVDG_Categories (id)
 );
+
+--
+-- CONTENT
+--
 
 COPY data.TrainingsmittelkatalogGewichthebenBVDG_Categories
 ( id
