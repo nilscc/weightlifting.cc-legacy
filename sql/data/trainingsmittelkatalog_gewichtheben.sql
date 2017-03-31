@@ -109,7 +109,7 @@ COPY data.TrainingsmittelkatalogGewichthebenBVDG
 0039  0009  'Beinbeuger-Maschine'       \N        \N                    \N      \N  \N  \N  \N
 0040  0009  'Gesäß-Maschine'            \N        \N                    \N      \N  \N  \N  \N
 0041  0009  'Rücken-Maschine'           \N        \N                    \N      \N  \N  \N  \N
-0042  0009  'Lastissimus-Maschine'      \N        \N                    \N      \N  \N  \N  \N
+0042  0009  'Latissimus-Maschine'       \N        \N                    \N      \N  \N  \N  \N
 0043  0009  'Delta-Maschine'            \N        \N                    \N      \N  \N  \N  \N
 0044  0009  'Beinstrecker-Maschine'     \N        \N                    \N      \N  \N  \N  \N
 0045  0009  'Weitere AMKT-Übungen'      \N        \N                    \N      \N  \N  \N  \N
