@@ -18,6 +18,10 @@ import Util.Types
 import LiftMe.Authentication.Routing
 import LiftMe.Training.Routing
 
+import LiftMe.Html.MainPage
+import LiftMe.Html.Error.NotFound
+import LiftMe.Html.Menu
+
 data PathConfiguration = PathConfiguration
   { staticFilesFilePath :: FilePath
   }
@@ -28,8 +32,9 @@ mainRoute
   -> con
   -> ServerPartT IO Response
 mainRoute pc con = msum
-  [ dir "api" $ apiRoute con
-  , staticFileServeRoute (staticFilesFilePath pc)
+  [ dir "api"    $ apiRoute con
+  , dir "static" $ staticFileServeRoute (staticFilesFilePath pc)
+  , notFoundRoute
   ]
 
 staticFileServeRoute
@@ -53,3 +58,6 @@ apiRoute con = do
   case apiResult of
     ApiOk val    -> ok $ toResponse $ encode val
     ApiError err -> badRequest $ toResponse err
+
+notFoundRoute :: ServerPart Response
+notFoundRoute = notFound $ toResponse notFoundPage

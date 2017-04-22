@@ -19,13 +19,14 @@ executable lift-me
   main-is:             LiftMe.hs
   -- other-modules:       
   -- other-extensions:    
-  build-depends:       base >=4.8 && <4.9,
+  build-depends:       base >=4.9 && <4.10,
                        mtl,
                        time,
                        bytestring,
                        text,
                        filepath,
                        happstack-server,
+                       blaze-html,
                        HDBC,
                        HDBC-postgresql,
                        aeson,

@@ -3,12 +3,12 @@ require.config({
 
   // set js dependency paths manually
   paths: {
-    jquery: "/js/jquery-3.1.1",
-    handlebars: "/js/handlebars-v4.0.5",
+    jquery: "/static/js/jquery-3.1.1",
+    handlebars: "/static/js/handlebars-v4.0.5",
   },
 
   // base url for typescript modules
-  baseUrl: "/ts",
+  baseUrl: "/static/ts",
 });
 
 // run main
