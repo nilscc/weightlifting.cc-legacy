@@ -2,6 +2,21 @@ body
 {
   margin: 0;
   padding: 0;
+  max-width: 60em;
+}
+
+@media screen and (min-width: 60em)
+{
+  body
+  {
+    margin: auto;
+  }
+  body > menu,
+  body > main
+  {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+  }
 }
 
 body > menu
@@ -32,4 +47,8 @@ body > footer
   font-size: 0.7em;
   color: #ccc;
   text-align: center;
+}
+body > footer a
+{
+  color: #aaa;
 }
