@@ -14,26 +14,28 @@ import qualified Text.Blaze.Html5.Attributes as H
 
 import Util.Html
 
+import LiftMe.Database
+
 data MenuText = MenuText
-  { mt_hello :: Text
+  { mt_notRegistered :: Text
   }
 
-data Menu = Menu
-  { userName    :: Text
-  , userPicture :: Maybe Text
-  , userProfile :: Text
+defaultMenuText :: MenuText
+defaultMenuText = MenuText
+  { mt_notRegistered = "Not registered."
   }
+
+data Menu = NotRegisteredMenu
 
 instance ToMarkup (MenuText, Menu) where
   toMarkup (txt, menu) = do
 
-    -- show profile picture (if any)
-    case userPicture menu of
-      Nothing  -> return ()
-      Just pic -> H.img ! H.src (H.toValue pic)
+    H.p $ H.toHtml (mt_notRegistered txt)
 
-    -- user greeting & link to profile
-    H.a ! H.href (H.toValue $ userProfile menu) $ do
-      H.toHtml (mt_hello txt)
-      " "
-      H.toHtml (userName menu)
+getMenu :: DB -> ServerPart Html
+getMenu db = do
+
+  let menuText = defaultMenuText
+      menu     = NotRegisteredMenu
+
+  return $ H.toMarkup (menuText, menu)

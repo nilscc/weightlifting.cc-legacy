@@ -15,15 +15,16 @@ import Happstack.Server
 -- local imports
 import Util.DatabaseHelper
 import Util.Types
+import LiftMe.Database
 import LiftMe.Training.Lookup
 
-type ApiRoute = forall con. IConnection con => con -> ServerPartT IO ApiResult
+type ApiRoute = DB -> ServerPartT IO ApiResult
 
 trainingRoute :: ApiRoute
-trainingRoute con = msum
-  [ dir "workouts" $ workoutRoute con
+trainingRoute db = msum
+  [ dir "workouts" $ workoutRoute db
   ]
 
 workoutRoute :: ApiRoute
-workoutRoute con = do
-  apiOk <$> lookupWorkouts con
+workoutRoute db = do
+  apiOk <$> lookupWorkouts db

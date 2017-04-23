@@ -1,8 +1,15 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Main where
 
 import Control.Monad
 import Happstack.Server.SimpleHTTP
 import Database.HDBC.PostgreSQL
+
+import qualified Data.Text as T
+import qualified Data.Text.IO as T
+
+import LiftMe.Database
 
 -- Routing
 import LiftMe.Routing (mainRoute, PathConfiguration(..))
@@ -24,9 +31,10 @@ postgresConf = "host='localhost' user='weightlifting-cc' dbname='weightlifting-c
 -- Run the webserver
 main :: IO ()
 main = do
-  withPostgreSQL postgresConf $ \con -> do
+  withDB postgresConf $ \db -> do
+    putStrLn $ "Starting HTTP server on port " ++ show (port serverConf) ++ "."
     simpleHTTP serverConf $ do
       -- Only allow connections from localhost => nginx proxy
       guard . ("127.0.0.1" ==) . fst . rqPeer =<< askRq
       -- Run main routing
-      mainRoute pathConfiguration con
+      mainRoute pathConfiguration db

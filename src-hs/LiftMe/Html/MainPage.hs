@@ -86,8 +86,15 @@ emptyMainPage = MainPage
   , footer  = return ()
   }
 
-defaultMainPage :: MainPage
-defaultMainPage = emptyMainPage
-  { css = [ LinkStylesheet "style/main.css" ]
-  , js  = [ LinkJavascript "js/require.js" [("main", "/static/js/require.config.js")] ]
+defaultMainPage
+  :: Html   -- ^ Menu
+  -> Html   -- ^ Content
+  -> Html   -- ^ Footer
+  -> MainPage
+defaultMainPage menu content footer = emptyMainPage
+  { css     = [ LinkStylesheet "style/main.css" ]
+  , js      = [ LinkJavascript "js/main.js" [] ]
+  , menu    = menu
+  , content = content
+  , footer  = footer
   }

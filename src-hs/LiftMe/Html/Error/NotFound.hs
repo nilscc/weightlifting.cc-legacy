@@ -14,8 +14,10 @@ import LiftMe.Html.MainPage
 import LiftMe.Html.Menu
 
 notFoundPage :: MainPage
-notFoundPage = defaultMainPage
-  { content = do
-      H.h1 "404: Page not found"
-      H.p  "The requested page was not found."
-  }
+notFoundPage = defaultMainPage menu content footer
+ where
+  menu = return ()
+  content = do
+    H.h1 "404: Page not found"
+    H.p  "The requested page was not found."
+  footer = return ()

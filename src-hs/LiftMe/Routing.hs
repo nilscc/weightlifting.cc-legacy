@@ -15,25 +15,28 @@ import Happstack.Server
 
 -- local imports
 import Util.Types
-import LiftMe.Authentication.Routing
-import LiftMe.Training.Routing
+import LiftMe.Database
+--import LiftMe.Authentication.Routing
+--import LiftMe.Training.Routing
 
 import LiftMe.Html.MainPage
 import LiftMe.Html.Error.NotFound
 import LiftMe.Html.Menu
+import LiftMe.Html.Content
+import LiftMe.Html.Footer
 
 data PathConfiguration = PathConfiguration
   { staticFilesFilePath :: FilePath
   }
 
 mainRoute
-  :: IConnection con
-  => PathConfiguration
-  -> con
+  :: PathConfiguration
+  -> DB
   -> ServerPartT IO Response
-mainRoute pc con = msum
-  [ dir "api"    $ apiRoute con
+mainRoute pc db = msum
+  [ dir "api"    $ apiRoute db
   , dir "static" $ staticFileServeRoute (staticFilesFilePath pc)
+  , contentRoute db
   , notFoundRoute
   ]
 
@@ -45,19 +48,34 @@ staticFileServeRoute staticFilePath = do
   serveDirectory DisableBrowsing ["index.html"] staticFilePath
 
 apiRoute
-  :: IConnection con
-  => con
+  :: DB
   -> ServerPartT IO Response
-apiRoute con = do
+apiRoute db = mzero {- do
 
   apiResult <- msum
-    [ dir "auth"     $ authRoute con
-    , dir "training" $ trainingRoute con
+    [ dir "auth"     $ authRoute db
+    , dir "training" $ trainingRoute db
     ]
 
   case apiResult of
     ApiOk val    -> ok $ toResponse $ encode val
     ApiError err -> badRequest $ toResponse err
+  -}
 
 notFoundRoute :: ServerPart Response
 notFoundRoute = notFound $ toResponse notFoundPage
+
+contentRoute :: DB -> ServerPart Response
+contentRoute db = do
+
+  -- default page
+  method GET
+  nullDir
+
+  -- get html content
+  menu    <- getMenu    db
+  content <- getContent db
+  footer  <- getFooter  db
+
+  -- build response
+  ok . toResponse $ defaultMainPage menu content footer

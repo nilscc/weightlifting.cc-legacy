@@ -6,7 +6,8 @@ import Database.HDBC
 import Happstack.Server
 
 -- local imports
+import LiftMe.Database
 import Util.Types
 
-authRoute :: IConnection con => con -> ServerPartT IO ApiResult
+authRoute :: DB -> ServerPartT IO ApiResult
 authRoute con = mzero
