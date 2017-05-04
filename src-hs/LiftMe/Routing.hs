@@ -25,6 +25,8 @@ import LiftMe.Html.Menu
 import LiftMe.Html.Content
 import LiftMe.Html.Footer
 
+import qualified LiftMe.Training.Routing as Training
+
 data PathConfiguration = PathConfiguration
   { staticFilesFilePath :: FilePath
   }
@@ -50,17 +52,9 @@ staticFileServeRoute staticFilePath = do
 apiRoute
   :: DB
   -> ServerPartT IO Response
-apiRoute db = mzero {- do
-
-  apiResult <- msum
-    [ dir "auth"     $ authRoute db
-    , dir "training" $ trainingRoute db
-    ]
-
-  case apiResult of
-    ApiOk val    -> ok $ toResponse $ encode val
-    ApiError err -> badRequest $ toResponse err
-  -}
+apiRoute db = msum
+  [ dir "new_workout" $ Training.newWorkoutRoute db
+  ]
 
 notFoundRoute :: ServerPart Response
 notFoundRoute = notFound $ toResponse notFoundPage

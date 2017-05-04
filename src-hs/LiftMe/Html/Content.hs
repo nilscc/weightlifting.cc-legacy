@@ -42,6 +42,8 @@ getContent db = do
   -- build HTML
   return $ do
 
+    newWorkoutForm
+
     H.h1 $ H.toHtml (m_ctExercises contentText)
 
     forM_ exs $ \(cat, exs) -> do
@@ -50,3 +52,11 @@ getContent db = do
         forM_ exs $ \ex -> do
           H.li ! A.id (H.toValue $ "exercise_" ++ show (m_exerciseId ex)) $
             H.toHtml (m_exerciseName ex)
+
+newWorkoutForm :: Html
+newWorkoutForm = H.form ! A.id "new_workout" $ do
+
+  H.input ! A.name "exercise[]"
+  H.input ! A.name "exercise[]"
+  H.input ! A.name "exercise[]"
+  H.input ! A.name "exercise[]"
